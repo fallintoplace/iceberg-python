@@ -60,6 +60,8 @@ def property_as_bool(
 ) -> bool:
     if (value := properties.get(property_name)) not in (None, ""):
         try:
+            if isinstance(value, bool):
+                return value
             return strtobool(str(value))
         except ValueError as e:
             raise ValueError(f"Could not parse table property {property_name} to a boolean: {value}") from e
